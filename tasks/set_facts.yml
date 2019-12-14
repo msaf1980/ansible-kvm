@@ -18,8 +18,8 @@
     kvm_debian_packages:
       - bridge-utils
       - libvirt-bin
-      - python[3]*-libvirt
-      - python[3]*-lxml
+      - python*-libvirt
+      - python*-lxml
       - qemu-kvm
   when: >
     (ansible_distribution == "Debian" and
@@ -34,8 +34,8 @@
       - bridge-utils
       - libvirt-daemon-system
       - libvirt-clients
-      - python[3]*-libvirt
-      - python[3]*-lxml
+      - python*-libvirt
+      - python*-lxml
       - qemu-kvm
   when: >
     (ansible_distribution == "Debian" and

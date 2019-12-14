@@ -145,6 +145,7 @@ kvm_redhat_packages:
   - libvirt-client
   - libvirt-python
   - libvirt
+  - python-lxml
   - qemu-img
   - qemu-kvm
   - virt-install
