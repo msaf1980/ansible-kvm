@@ -4,18 +4,18 @@
   <uuid>{{ item['uuid'] }}</uuid>
 {% endif %}
 {% if item['mode'] == "bridge" %}
-  <bridge name="{{ item['bridge_name'] }}"{% if item['stp'] is defined %} stp="{{ item['stp'] }}"{% endif %} delay="item['bridge_delay'] | default('0')" />
+  <bridge name="{{ item['bridge_name'] }}"{% if item['stp'] is defined %} stp="{{ item['stp'] }}"{% endif %}{% if item['brigde_delay'] is defined %} delay="item['bridge_delay']{% endif %} />
   <forward mode="{{ item['mode'] }}" />
 {% endif %}
 {% if item['mode'] == "nat" %}
-  <bridge name="{{ item['bridge_name'] }}"{% if item['stp'] is defined %} stp="{{ item['stp'] }}"{% endif %} delay="item['bridge_delay'] | default('0')" />
+  <bridge name="{{ item['bridge_name'] }}"{% if item['stp'] is defined %} stp="{{ item['stp'] }}"{% endif %}{% if item['brigde_delay'] is defined %} delay="item['bridge_delay']{% endif %} />
   <forward mode="{{ item['mode'] }}" />
 {% endif %}
 {% if item['mode'] == "private" %}
   <bridge name="{{ item['bridge_name'] }}" />
 {% endif %}
 {% if item['mode'] == "route" %}
-  <bridge name="{{ item['bridge_name'] }}"{% if item['stp'] is defined %} stp="{{ item['stp'] }}"{% endif %} delay="item['bridge_delay'] | default('0')" />
+  <bridge name="{{ item['bridge_name'] }}"{% if item['stp'] is defined %} stp="{{ item['stp'] }}"{% endif %}{% if item['brigde_delay'] is defined %} delay="item['bridge_delay']{% endif %} />
   <forward mode="{{ item['mode'] }}" dev="{{ item['route_device'] }}" />
 {% endif %}
 {% if item['virtualport_type'] is defined %}
@@ -36,7 +36,8 @@
     </dhcp>
   </ip>
 {% else %}
-  <ip address="{{ item['ip'] }}" netmask="{{ item['netmask'] }}" />
+{% if item['ip'] is defined %}  <ip address="{{ item['ip'] }}" netmask="{{ item['netmask'] }}" />
+{% endif %}
 {% endif %}
 {% if item['vlans'] is defined %}
 {%   for vl in item['vlans'] %}
