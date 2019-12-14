@@ -1,9 +1,12 @@
 ---
 
-- name: set_facts | Setting Debian Facts
+- name: set_facts | Setting Debian/Redhat Facts
   set_fact:
     kvm_service_name: libvirtd
-  when: ansible_distribution in ["Debian", "CentOS"]
+  when: >
+    ansible_distribution == "Debian"
+    or
+    ansible_os_family == "RedHat"
 
 - name: set_facts | Setting Ubuntu Facts
   set_fact:
@@ -40,3 +43,17 @@
     or
     (ansible_distribution == "Ubuntu" and
     ansible_distribution_version >= "18.10")
+
+- name: set_facts | Add fuse (RedHat)
+  set_fact:
+    kvm_debian_packages: "{{ kvm_redhat_packages }} + [ fuse ]"
+  when:
+    - kvm_fuse_install
+    - ansible_os_family == "RedHat"
+
+- name: set_facts | Add fuse (Debian)
+  set_fact:
+    kvm_debian_packages: "{{ kvm_debian_packages }} + [ fuse ]"
+  when:
+    - kvm_fuse_install
+    - ansible_os_family == "Debian"

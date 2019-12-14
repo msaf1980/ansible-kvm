@@ -151,6 +151,8 @@ kvm_redhat_packages:
   - virt-manager
   - virt-viewer
 
+kvm_fuse_install: false
+
 # I experienced an issue with bridges no longer working on Ubuntu 16.04
 # for some reason. And the following settings below from the link provided
 # solved this issue.

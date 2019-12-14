@@ -18,7 +18,7 @@
   tags:
     - config_users
   when:
-    - kvm_config_users
+    - kvm_config
     - kvm_users is defined
 
 - include: config_ssh.yml
