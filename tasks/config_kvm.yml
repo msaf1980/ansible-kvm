@@ -13,6 +13,15 @@
     - getent_group is defined
     - "'libvirt' in getent_group or 'libvirtd' in getent_group"
 
+- name: config_kvm | Configure module
+  template:
+    src: etc/modprobe.d/module.conf.j2
+    dest: /etc/modprobe.d/vhost-net.conf
+  vars:
+    kvm_module: 'vhost-net'
+    kvm_module_options: "{{ kvm_vhost_net_options }}"
+  when: kvm_vhost_net_options is defined
+
 - name: config_kvm | configuring kvm
   template:
     src: etc/libvirt/libvirtd.conf.j2
