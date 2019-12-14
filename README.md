@@ -67,6 +67,30 @@ kvm_vms:
     vcpu: 1
 ```
 
+
+## Example Vars for configure networks
+
+kvm_config_virtual_networks: true
+kvm_virtual_networks:
+  - name: 'default'
+    bridge_name: 'virbr0'
+    mode: 'nat'
+    state: 'active'
+    autostart: 'true'
+    enable_dhcp: true
+    ip: '192.168.122.1'
+    netmask: '255.255.255.0'
+    dhcp_scope_start: '192.168.122.2'
+    dhcp_scope_end: '192.168.122.254'
+  - name: 'lan'
+    bridge_name: 'virbr1'
+    mode: 'routed'
+    state: 'active'
+    autostart: 'true'
+    ip: '192.168.0.2'
+    netmask: '255.255.255.0'
+
+
 ## License
 
 MIT

@@ -30,11 +30,13 @@
 {%   endfor %}
   </dns>
 {% endif %}
-  <ip address="{{ item['dhcp_gateway'] }}" netmask="{{ item['dhcp_netmask'] }}">
+  <ip address="{{ item['ip'] }}" netmask="{{ item['netmask'] }}">
     <dhcp>
       <range start="{{ item['dhcp_scope_start'] }}" end="{{ item['dhcp_scope_end'] }}" />
     </dhcp>
   </ip>
+{% else %}
+  <ip address="{{ item['ip'] }}" netmask="{{ item['netmask'] }}" />
 {% endif %}
 {% if item['vlans'] is defined %}
 {%   for vl in item['vlans'] %}
