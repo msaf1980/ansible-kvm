@@ -21,3 +21,10 @@
   become: true
   notify: "restart {{ kvm_service_name }}"
   when: not ansible_check_mode
+
+- name: config_kvm | Ensuring libvirtd Service Is Enabled and Started
+  service:
+    name: "{{ kvm_service_name }}"
+    enabled: true
+    state: started
+  become: true
