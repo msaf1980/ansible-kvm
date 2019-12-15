@@ -151,6 +151,7 @@ kvm_redhat_packages:
   - virt-install
   - virt-manager
   - virt-viewer
+  - virt-top
 
 kvm_redhat_libguestfs:
   - libguestfs-tools
