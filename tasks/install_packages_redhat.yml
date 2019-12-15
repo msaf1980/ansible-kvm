@@ -7,10 +7,20 @@
   register: result
   until: result is successful
 
+- name: redhat | Installing libguestfs
+  yum:
+    name: "{{ kvm_redhat_libguestfs }}"
+    state: present
+  become: true
+  when: kvm_libguestfs_install
+  register: result
+  until: result is successful
+
 - name: redhat | Creating libvirt Group
   group:
     name: libvirt
     state: present
+    system: yes
   become: true
   when: >
     (ansible_distribution == "Fedora" and

@@ -152,6 +152,22 @@ kvm_redhat_packages:
   - virt-manager
   - virt-viewer
 
+kvm_redhat_libguestfs:
+  - libguestfs-tools
+  - libguestfs-rsync
+  - libguestfs-xfs
+  - libguestfs-rescue
+  - libguestfs-tools-c
+  - python-libguestfs
+
+kvm_debian_libguestfs:
+  - libguestfs-tools
+  - libguestfs-rescue
+  - libguestfs-rsync
+  - libguestfs-xfs
+  - python[3]*-guestfs
+
+kvm_libguestfs_install: true
 kvm_fuse_install: false
 
 # Red Hat Enterprise Linux 7: enable vhost-net zero-copy

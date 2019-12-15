@@ -9,6 +9,16 @@
   register: result
   until: result is successful
 
+- name: debian | Installing libguestfs
+  become: true
+  apt:
+    update_cache: true
+    name: "{{ kvm_debian_libguestfs }}"
+    state: present
+  register: result
+  when: kvm_libguestfs_install
+  until: result is successful
+
 - name: debian | Installing Additional Ubuntu Packages
   become: true
   apt:
