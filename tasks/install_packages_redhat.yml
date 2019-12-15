@@ -20,7 +20,7 @@
   group:
     name: libvirt
     state: present
-    system: yes
+    system: true
   become: true
   when: >
     (ansible_distribution == "Fedora" and

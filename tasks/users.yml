@@ -1,6 +1,6 @@
 ---
 
-- name: users | adding kvm users
+- name: users | adding admin users to qemu groups
   user:
     name: "{{ item }}"
     groups: "{{ kvm_unix_sock_group }},kvm"

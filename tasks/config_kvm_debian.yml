@@ -1,0 +1,37 @@
+---
+
+- name: config_kvm_debian | Set unix_sock_group
+  set_fact:
+    kvm_unix_sock_group: "libvirt-qemu"
+
+- name: config_kvm_debian | configuring kvm TCP
+  replace:
+    dest: /etc/default/libvirt-bin
+    regexp: '^libvirtd_opts='
+    replace: 'libvirtd_opts="-d -l"'
+  become: true
+  notify: "restart {{ kvm_service_name }}"
+  when: >
+    kvm_enable_tcp and
+    not ansible_check_mode and
+    (ansible_distribution == "Debian" and
+    ansible_distribution_major_version|int < 9)
+    or
+    (ansible_distribution == "Ubuntu" and
+    ansible_distribution_version < "18.10")
+
+- name: config_kvm_debian | configuring kvm TCP
+  replace:
+    dest: /etc/default/libvirtd
+    regexp: '^libvirtd_opts='
+    replace: 'libvirtd_opts="-l"'
+  become: true
+  notify: "restart {{ kvm_service_name }}"
+  when: >
+    kvm_enable_tcp and
+    not ansible_check_mode and
+    (ansible_distribution == "Debian" and
+    ansible_distribution_major_version|int >= 9)
+    or
+    (ansible_distribution == "Ubuntu" and
+    ansible_distribution_version >= "18.10")

@@ -25,6 +25,7 @@
       - virt-manager
       - virt-viewer
       - virt-top
+      - libosinfo-bin
   when: >
     (ansible_distribution == "Debian" and
     ansible_distribution_major_version|int < 9)
@@ -45,6 +46,7 @@
       - virt-manager
       - virt-viewer
       - virt-top
+      - libosinfo-bin
   when: >
     (ansible_distribution == "Debian" and
     ansible_distribution_major_version|int >= 9)

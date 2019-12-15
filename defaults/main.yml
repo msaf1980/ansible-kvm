@@ -18,11 +18,11 @@ kvm_audit_logging: 0
 
 # Set an authentication scheme for UNIX read-only sockets
 # By default socket permissions allow anyone to connect
-kvm_auth_unix_ro: none
+kvm_auth_unix_ro: '0770'
 
 # Set an authentication scheme for UNIX read-write sockets
 # By default socket permissions only allow root.
-kvm_auth_unix_rw: none
+kvm_auth_unix_rw: '0770'
 
 # Defines if kvm/libvirt should be configured
 kvm_config: false
@@ -152,6 +152,7 @@ kvm_redhat_packages:
   - virt-manager
   - virt-viewer
   - virt-top
+  - libosinfo
 
 kvm_redhat_libguestfs:
   - libguestfs-tools
@@ -172,7 +173,7 @@ kvm_libguestfs_install: true
 kvm_fuse_install: false
 
 # Red Hat Enterprise Linux 7: enable vhost-net zero-copy
-#kvm_vhost_net_options: "experimental_zcopytx=1"
+# kvm_vhost_net_options: "experimental_zcopytx=1"
 
 # I experienced an issue with bridges no longer working on Ubuntu 16.04
 # for some reason. And the following settings below from the link provided

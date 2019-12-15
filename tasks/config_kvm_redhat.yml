@@ -1,0 +1,16 @@
+---
+
+- name: config_kvm_redhat | Set unix_sock_group
+  set_fact:
+    kvm_unix_sock_group: "libvirt"
+
+- name: config_kvm_debian | configuring kvm TCP
+  replace:
+    dest: /etc/sysconfig/libvirtd
+    regexp: '^LIBVIRTD_ARGS='
+    replace: 'LIBVIRTD_ARGS="-l"'
+  become: true
+  notify: "restart {{ kvm_service_name }}"
+  when:
+    - kvm_enable_tcp
+    - not ansible_check_mode
